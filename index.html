@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="handleproductprize('phone',false)"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phone-count" type="text" class="form-control text-center" value="1">
+                           <button onclick="handleproductprize('phone', true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5 id="phone-total">$700</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="handleproductprize('case',false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-count" type="text" class="form-control text-center" value="1">
+                           <button onclick="handleproductprize('case',true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5 id="case-total">$59</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5 id="total-prize">$759</h5>
+                        <h5 id="tax">$38</h5>
+                        <h5 id="total-amount">$797</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button id="check" type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+<script>
+
+// document.getElementById('plus').addEventListener('click', function(){
+//       handleproductprize(true);
+//    })
+
+
+// document.getElementById('minus').addEventListener('click', function(){
+//       handleproductprize(false);
+//    })
+
+   function handleproductprize(product, isIncrease){
+      // const valueinput= document.getElementById(product+ '-count');
+      // const valuecount= parseInt(valueinput.value);
+      const valuecount = getinputvalue(product);
+      // const newvalue= valuecount -1;
+      let newvalue= valuecount;
+      if(isIncrease == true){
+         newvalue= valuecount +1;
+      }
+      if( isIncrease == false && valuecount>>0  
+
+      ){
+         newvalue= valuecount -1;
+      }
+      document.getElementById(product + '-count').value=newvalue;
+      //const total = newvalue * 59;
+      let total=0;
+      if(product=='phone'){
+         total = newvalue * 700;
+      }
+      if(product=='case'){
+         total = newvalue * 59;
+      }
+      document.getElementById(product + '-total').innerText= '$' + total;
+      calculatetotal();
+   }
+
+
+
+   // document.getElementById('plus').addEventListener('click', function(){
+   //    const valueinput= document.getElementById('value');
+   //    const valuecount= parseInt(valueinput.value);
+   //    const newvalue= valuecount +1;
+   //    valueinput.value=newvalue;
+   //    const total = newvalue * 59;
+   //    document.getElementById('money').innerText= '$' + total;
+   // })
+   // document.getElementById('minus').addEventListener('click', function(){
+   //    const valueinput= document.getElementById('value');
+   //    const valuecount= parseInt(valueinput.value);
+   //    const newvalue= valuecount -1;
+   //    valueinput.value=newvalue;
+   //    const total = newvalue * 59;
+   //    document.getElementById('money').innerText= '$' + total;
+   // })
+
+//    document.getElementById('plusbtn').addEventListener('click', function(){
+//       handleproductprize1(true);
+//    })
+
+
+// document.getElementById('minusbtn').addEventListener('click', function(){
+//       handleproductprize1(false);
+//    })
+
+
+   // function handleproductprize1(isIncrease){
+   //    const valuein= document.getElementById('phone-count');
+   //    const valuect= parseInt(valuein.value);
+   //    // const newvalue= valuecount -1;
+   //    let newval= valuect;
+   //    if(isIncrease == true){
+   //       newval= valuect +1;
+   //    }
+   //    if( isIncrease == false && valuect>>0  
+
+   //    ){
+   //       newval= valuect -1;
+   //    }
+   //    valuein.value=newval;
+   //    const tot = newval * 700;
+   //    document.getElementById('doller').innerText= '$' + tot;
+   // }
+
+   // document.getElementById('plusbtn').addEventListener('click',function(){
+   //    const valueinput=document.getElementById('id');
+   //    const valuecount= parseInt(valueinput.value);
+   //    const newvalue= valuecount+1;
+   //    valueinput.value=newvalue;
+   //    const total= newvalue * 1000;
+   //    document.getElementById('doller').innerText= '$' + total;
+   // })
+
+   // document.getElementById('minusbtn').addEventListener('click',function(){
+   //    const valueinput=document.getElementById('id');
+   //    const valuecount= parseInt(valueinput.value);
+   //    const newvalue= valuecount-1;
+   //    valueinput.value=newvalue;
+   //    const total= newvalue * 1000;
+   //    document.getElementById('doller').innerText= '$' + total;
+   // })
+
+   function calculatetotal(){
+      // const phoneinput = document.getElementById('phone-count');
+      // const phonecount= parseInt(phoneinput.value);
+
+      const phonecount = getinputvalue('phone');
+
+      // const caseinput= document.getElementById('case-count');
+      // const casecount= parseInt(caseinput.value);
+
+      const casecount= getinputvalue('case');
+
+
+      const totalprize= phonecount * 700 + casecount * 59;
+      document.getElementById('total-prize').innerText= '$' + totalprize;
+
+      const tax= Math.round(totalprize *0.05);
+      document.getElementById('tax').innerText= '$'+ tax;
+
+      const totalamount= totalprize + tax;
+      document.getElementById('total-amount').innerText='$' + totalamount;
+   }
+
+   function getinputvalue(product){
+      const productinput = document.getElementById(product + '-count');
+      const productcount = parseInt(productinput.value);
+      return productcount;
+   }
+
+   document.getElementById('check').addEventListener('click', function(){
+      alert("Successfully Completed your order. You will get your item within 7days");
+   })
+</script>
+
+
+</body>
+
+</html>
